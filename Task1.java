@@ -1,7 +1,7 @@
 class BankAccount {
     private String accountNumber;
     private String holderName;
-    private double balance;
+    protected double balance;
 
     public BankAccount(String accountNumber, String holderName, double balance) {
         this.accountNumber = accountNumber;
@@ -22,14 +22,6 @@ class BankAccount {
         System.out.println("Holder Name: " + holderName);
         System.out.println("Balance: " + balance);
     }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 }
 
 class SavingsAccount extends BankAccount {
@@ -42,12 +34,11 @@ class SavingsAccount extends BankAccount {
 
     @Override
     public void withdraw(double amount) {
-        if (amount > 0 && amount <= getBalance()) setBalance(getBalance() - amount);
+        if (amount > 0 && amount <= balance) balance -= amount;
     }
 
     public void applyInterest() {
-        double interest = getBalance() * (interestRate / 100);
-        setBalance(getBalance() + interest);
+        balance += balance * (interestRate / 100);
     }
 
     @Override
